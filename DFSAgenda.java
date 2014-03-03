@@ -1,21 +1,21 @@
+package exercise4;
 import rp13.search.interfaces.Agenda;
-import rp13.search.util.ActionStatePair;
 
 import java.util.Iterator;
 import java.util.Stack;
 
-public class DFSAgenda implements Agenda<ActionStatePair> {
+public class DFSAgenda<ActionT, StateT> implements Agenda<Node<ActionT, StateT>> {
 
-    private Stack<ActionStatePair> Frontier = new Stack<ActionStatePair>();
-
+    private Stack<Node<ActionT, StateT>> frontier = new Stack<Node<ActionT, StateT>>();
+    
     /**
      * Adds the given item to the agenda.
      *
      * @param _item
      */
     @Override
-    public void push(ActionStatePair _item) {
-        Frontier.push(_item);
+    public void push(Node<ActionT, StateT> _item) {
+        frontier.push(_item);
     }
 
     /**
@@ -24,8 +24,8 @@ public class DFSAgenda implements Agenda<ActionStatePair> {
      * @return
      */
     @Override
-    public ActionStatePair pop() {
-        return Frontier.pop();
+    public Node<ActionT, StateT> pop() {
+        return frontier.pop();
 
     }
 
@@ -36,7 +36,7 @@ public class DFSAgenda implements Agenda<ActionStatePair> {
      */
     @Override
     public boolean isEmpty() {
-        return Frontier.isEmpty();
+        return frontier.isEmpty();
     }
 
     /**
@@ -46,17 +46,12 @@ public class DFSAgenda implements Agenda<ActionStatePair> {
      * @return
      */
     @Override
-    public boolean contains(ActionStatePair _item) {
-        for (int i = 0; i < Frontier.size(); i++) {
-            if (Frontier.get(i) == _item)
-                return true;
-        }
-        return false;
-
+    public boolean contains(Node<ActionT, StateT> _item) {
+        return frontier.contains(_item);
     }
 
     @Override
-    public Iterator<ActionStatePair> iterator() {
+    public Iterator<Node<ActionT, StateT>> iterator() {
         return null;
     }
 }
