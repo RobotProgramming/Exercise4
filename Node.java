@@ -1,33 +1,32 @@
+package exercise4;
 import rp13.search.util.ActionStatePair;
 
-import java.util.ArrayList;
-
-public class Node<ActionT, StateT> extends DFSAgenda {
-
-    private ActionT action;
-    private StateT state;
-    private Node parent;
-
-    public Node(ActionT _action, StateT _state) {
-        action = _action;
-        state = _state;
+public class Node<ActionT, StateT> {
+	private final ActionStatePair<ActionT, StateT> actionStatePair;
+	private final Node<ActionT, StateT> parent;
+	
+	public Node(StateT state) {
+		this(new ActionStatePair<ActionT, StateT>(null, state), null);
+	}
+    
+    public Node(ActionStatePair<ActionT, StateT> actionStatePair, Node<ActionT, StateT> parent) {
+    	this.actionStatePair = actionStatePair;
+    	this.parent = parent;
+    }
+    
+    public ActionStatePair<ActionT, StateT> getActionStatePair() {
+    	return actionStatePair;
     }
 
-    public Node(ActionT _action, StateT _state, Node _parent) {
-        action = _action;
-        state = _state;
-        parent = _parent;
+    public ActionT getAction() {
+    	return actionStatePair.getAction();
+    }
+    
+    public StateT getState() {
+    	return actionStatePair.getState();
     }
 
-    public void setContents(ActionT _action, StateT _state) {
-        action = _action;
-        state = _state;
-    }
-
-
-    public void explore() {
-        ArrayList<ActionStatePair<ActionT,StateT>> successors = new ArrayList<ActionStatePair<ActionT, StateT>>();
-
-    }
-
+	public Node<ActionT, StateT> getParent() {
+		return parent;
+	}
 }
