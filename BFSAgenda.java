@@ -1,12 +1,12 @@
+package exercise4;
 import rp13.search.interfaces.Agenda;
-import rp13.search.util.ActionStatePair;
 
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class BFSAgenda implements Agenda<ActionStatePair> {
+public class BFSAgenda<ActionT, StateT> implements Agenda<Node<ActionT, StateT>> {
 
-    private LinkedList<ActionStatePair> Frontier = new LinkedList<ActionStatePair>();
+    private LinkedList<Node<ActionT, StateT>> frontier = new LinkedList<Node<ActionT, StateT>>();
 
     /**
      * Adds the given item to the agenda.
@@ -14,8 +14,8 @@ public class BFSAgenda implements Agenda<ActionStatePair> {
      * @param _item
      */
     @Override
-    public void push(ActionStatePair _item) {
-        Frontier.addLast(_item);
+    public void push(Node<ActionT, StateT> _item) {
+        frontier.addLast(_item);
     }
 
     /**
@@ -24,8 +24,8 @@ public class BFSAgenda implements Agenda<ActionStatePair> {
      * @return
      */
     @Override
-    public ActionStatePair pop() {
-        return Frontier.removeFirst();
+    public Node<ActionT, StateT> pop() {
+        return frontier.removeFirst();
     }
 
     /**
@@ -35,7 +35,7 @@ public class BFSAgenda implements Agenda<ActionStatePair> {
      */
     @Override
     public boolean isEmpty() {
-        return Frontier.isEmpty();
+        return frontier.isEmpty();
     }
 
     /**
@@ -45,16 +45,12 @@ public class BFSAgenda implements Agenda<ActionStatePair> {
      * @return
      */
     @Override
-    public boolean contains(ActionStatePair _item) {
-        for (int i = 0; i < Frontier.size(); i++) {
-            if (Frontier.get(i) == _item)
-                return true;
-        }
-        return false;
+    public boolean contains(Node<ActionT, StateT> _item) {
+        return frontier.contains(_item);
     }
 
     @Override
-    public Iterator<ActionStatePair> iterator() {
+    public Iterator<Node<ActionT, StateT>> iterator() {
         return null;
 
     }
